@@ -4,6 +4,11 @@
  */
 package ec.edu.espol.util;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.HashMap;
 
 /**
@@ -20,7 +25,24 @@ public class Util {
      * @return 
      */
     public static String leerTexto(String nombreArchivo){
-        throw  new UnsupportedOperationException("");
+        String texto="";
+        
+        try {
+            File file=new File(nombreArchivo);
+            FileReader fr=new FileReader(file);
+            BufferedReader br=new BufferedReader(fr);
+            texto=br.readLine();
+            if(texto==null) throw  new NullPointerException("Archivo Vacío");
+            
+        } catch ( NullPointerException | IOException e) {
+            if(e instanceof NullPointerException){
+                System.err.println("Archivo Vacio!!");
+            }else{
+                System.err.println("Archivo no encontrado!!");
+            }
+        }
+        return  texto;
+        
     }
     /**
      * Esta función recibe el texto que se leyó desde el archivo y procede a calcular la frecuencia de cada uno de los caracteres del texto, 
