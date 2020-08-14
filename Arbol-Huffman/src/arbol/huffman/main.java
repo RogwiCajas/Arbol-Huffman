@@ -1,25 +1,29 @@
 
 package arbol.huffman;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+
 /**
  *
  * @author rogwi
  */
-public class main {
+public class main extends Application{
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        /*
-        Finalmente, usted deberá crear un programa que presente un menú de opciones 
-        para que el usuario pueda elegir la opción de comprimir o descomprimir un archivo, 
-        posteriormente, el usuario ingresará el nombre del archivo.  
-        Menú de Opciones 
-            1) Comprimir 
-            2) Descomprimir
-        
-        */
+    @Override
+    public void start(Stage stage) {
+        String javaVersion = System.getProperty("java.version");
+        String javafxVersion = System.getProperty("javafx.version");
+        Label l = new Label("Hello, JavaFX " + javafxVersion + ", running on Java " + javaVersion + ".");
+        Scene scene = new Scene(new StackPane(l), 640, 480);
+        stage.setScene(scene);
+        stage.show();
     }
-    
+
+    public static void main(String[] args) {
+        launch();
+    }
 }

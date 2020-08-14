@@ -1,5 +1,5 @@
 
-package ec.espol.edu;
+package ec.edu.espol.arbol;
 
 import java.util.HashMap;
 
