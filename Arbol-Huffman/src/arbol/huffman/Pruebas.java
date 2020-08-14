@@ -14,7 +14,9 @@ import ec.edu.espol.util.Util;
 public class Pruebas {
 
     public static void main(String[] args) {
-        System.out.println(Util.leerTexto("src\\recursos\\archivo.txt"));
+        //System.out.println(Util.leerTexto("src\\recursos\\archivo.txt"));
+        String texto=Util.leerTexto("src\\recursos\\archivo.txt");
+        System.out.println(Util.calcularFrecuencias(texto));
         
     }
     

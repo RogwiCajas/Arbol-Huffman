@@ -51,7 +51,18 @@ public class Util {
      * @return 
      */
     public static HashMap<String,Integer> calcularFrecuencias(String texto ){
-        throw  new UnsupportedOperationException("");
+        HashMap<String,Integer> mapa=new HashMap<>();
+        for(char c: texto.toCharArray()){
+            String letra=String.valueOf(c);
+            if(mapa.containsKey(letra)){
+                mapa.put(letra,mapa.get(letra)+1);
+            }else{
+                mapa.put(letra,1);
+            }
+        }
+        return mapa;
+            
+        
     }
     /**
      * Recibe una cadena en binario y la transforma en hexadcimal, agrupando en grupos de 4
