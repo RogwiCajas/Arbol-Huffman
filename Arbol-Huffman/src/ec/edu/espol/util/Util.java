@@ -230,6 +230,40 @@ public class Util {
      * @return 
      */
     public static HashMap<String,String> leerMapa(String nombreArchivo){
-        throw  new UnsupportedOperationException("");
+        HashMap<String,String> mapa=new HashMap<>();
+        File file=null;
+        FileReader fr=null;
+        BufferedReader br=null;
+        try {
+            file=new File(nombreArchivo);
+            fr=new FileReader(file);
+            br=new BufferedReader(fr);
+            String linea;
+            while((linea=br.readLine())!=null){
+                String data[] = linea.trim().split(",");
+                //key,value
+                mapa.put(data[0], data[1]);
+                        
+            }
+            
+            
+        } catch ( NullPointerException | IOException e) {
+            if(e instanceof NullPointerException){
+                System.err.println("Archivo Vacio!!");
+            }else{
+                System.err.println("Archivo no encontrado!!");
+            }
+        }finally{
+            try{                    
+                if( null != fr ){   
+                fr.close();     
+                }                  
+            }catch (IOException e2){
+                System.err.println("ERROR al cerrar el fichero!!");
+            }
+        }
+        
+        
+        return mapa;
     }
 }
