@@ -104,7 +104,27 @@ public class Util {
      * @return 
      */
     public static String hexadecimalBinario(String hexadecimal){
-        throw  new UnsupportedOperationException("");
+        StringBuilder bin = new StringBuilder();
+        int ceros=0;
+        for(int i=0; i<hexadecimal.length() ; i++){
+            String c=hexadecimal.substring(i, i+1);
+            if(c.equals("-")){
+                ceros++;
+            }else{    
+                int valInt=Integer.parseInt(c, 16);
+                String binario=Integer.toBinaryString(valInt);
+                //completo el bloque de 4 de ceros a la izq p
+                StringBuilder corregido=new StringBuilder();
+                int dif=4-binario.length();
+                for(int j=0 ;j<dif ; j++){
+                    corregido.append("0");
+                }
+                corregido.append(binario);
+                bin.append(corregido);
+            }
+        }
+        //quito ceros yu retorno
+        return bin.substring(0, bin.length()-ceros);
     }
     /**
      *  La función procede a almacenar el nuevo texto en el archivo y genera un 

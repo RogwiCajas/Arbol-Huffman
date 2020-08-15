@@ -18,7 +18,12 @@ public class Pruebas {
         //System.out.println(Util.leerTexto("src\\recursos\\archivo.txt"));
         String texto=Util.leerTexto("src\\recursos\\archivo.txt");
         HashMap<String,Integer> mapa=Util.calcularFrecuencias(texto);
-        System.out.println(Util.binarioHexadecimal("0010010010010010011101101101101101101101100000000000000001011011011011011011011001001001001001001111111111111111111111110101010101010101010101"));
+        String hex=Util.binarioHexadecimal("0010010010010010011101101101101101101101100000000000000001011011011011011011011001001001001001001111111111111111111111110101010101010101010101");
+        
+        System.out.println(hex);
+        
+        System.out.println("------------------------Binario-----------------------\n");
+        System.out.println(Util.hexadecimalBinario(hex));
     }
     
 }
