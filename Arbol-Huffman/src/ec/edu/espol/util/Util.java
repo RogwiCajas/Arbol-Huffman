@@ -8,8 +8,12 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 /**
  *
@@ -26,19 +30,30 @@ public class Util {
      */
     public static String leerTexto(String nombreArchivo){
         String texto="";
-        
+        File file=null;
+        FileReader fr=null;
+        BufferedReader br=null;
         try {
-            File file=new File(nombreArchivo);
-            FileReader fr=new FileReader(file);
-            BufferedReader br=new BufferedReader(fr);
+            file=new File(nombreArchivo);
+            fr=new FileReader(file);
+            br=new BufferedReader(fr);
             texto=br.readLine();
             if(texto==null) throw  new NullPointerException("Archivo Vacío");
+            
             
         } catch ( NullPointerException | IOException e) {
             if(e instanceof NullPointerException){
                 System.err.println("Archivo Vacio!!");
             }else{
                 System.err.println("Archivo no encontrado!!");
+            }
+        }finally{
+            try{                    
+                if( null != fr ){   
+                fr.close();     
+                }                  
+            }catch (IOException e2){
+                System.err.println("ERROR al cerrar el fichero!!");
             }
         }
         return  texto;
@@ -137,7 +152,76 @@ public class Util {
      * @param mapa 
      */
     public static void guardarTexto(String nombreArchivo,String texto,HashMap<String,String > mapa){
-        throw  new UnsupportedOperationException("");
+        //Actualizo el archivo
+        actualizarArchivo(nombreArchivo, texto);
+        //Creo el archivo con las claves
+        guardarClaves(nombreArchivo, mapa);
+    }
+    /**
+     * Crea el archivo con las claves de desencriptacion 
+     * @param nombreArchivo
+     * @param mapa 
+     */
+    private static void guardarClaves(String nombreArchivo,HashMap<String,String> mapa){
+        FileWriter fichero = null;
+        PrintWriter pw= null;
+        try {
+            fichero = new FileWriter(nombreArchivo+"_compress.txt");
+            pw=new PrintWriter(fichero);
+            //Recorro  el mapa y escribo en el doc
+            Iterator<Map.Entry<String,String>> it= mapa.entrySet().iterator();
+            while(it.hasNext()){
+                Map.Entry<String,String> e=it.next();
+                pw.println(e.getKey()+","+e.getValue());
+                
+            }
+            
+        } catch ( NullPointerException | IOException e) {
+            if(e instanceof NullPointerException){
+                System.err.println("Archivo Vacio!!");
+            }else{
+                System.err.println("Archivo no encontrado!!");
+            }
+        }finally{
+            try {
+                if(fichero!=null){
+                    fichero.close();
+                }
+            } catch (IOException e) {
+                System.err.println("Error al cerrar el archivo!!");
+            }
+        }
+        
+    }
+    /**
+     * Actualiza el archivo con su contenido codificado.
+     * @param nombreArchivo
+     * @param texto 
+     */
+    private static void actualizarArchivo(String nombreArchivo, String texto){
+        FileWriter fichero = null;
+        PrintWriter pw= null;
+        try {
+            fichero = new FileWriter(nombreArchivo);
+            pw=new PrintWriter(fichero);
+            //Escribo en el doc
+            pw.print(texto);
+            
+        } catch ( NullPointerException | IOException e) {
+            if(e instanceof NullPointerException){
+                System.err.println("Archivo Vacio!!");
+            }else{
+                System.err.println("Archivo no encontrado!!");
+            }
+        }finally{
+            try {
+                if(fichero!=null){
+                    fichero.close();
+                }
+            } catch (IOException e) {
+                System.err.println("Error al cerrar el archivo!!");
+            }
+        }
     }
     /**
      * Esta función lee el mapa de códigos para cada carácter desde un archivo 
