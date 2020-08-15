@@ -72,7 +72,28 @@ public class Util {
      * @return 
      */
     public static String binarioHexadecimal(String binario){
-        throw  new UnsupportedOperationException("");
+        StringBuilder hex=new StringBuilder();
+        //Completamos el ultimo Byte
+        int l=binario.length();
+        StringBuilder corregido = new StringBuilder();
+        corregido.append(binario);
+        int residuo=l%4;
+        if(residuo!=0){
+            for(int j=0;j<residuo;j++){
+                corregido.append("0");
+            }
+        }
+        //Transforma a hex
+        for(int i=0 ; i<corregido.length() ; i+=4){//REcorro de 4 en 4
+            int numero=Integer.parseInt(corregido.substring(i,i+4),2);
+            String reph=Integer.toString(numero,16);
+            hex.append(reph);
+        }
+        //añado - por cada 0
+        for(int k=0; k<residuo; k++){
+            hex.append("-");
+        }
+        return hex.toString();
     }
     /**
      * Esta función recibe una cadena de caracteres que representa la 
