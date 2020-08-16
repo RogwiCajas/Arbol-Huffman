@@ -58,13 +58,13 @@ public class ArbolHuffman {
            hojas.sort((Nodo n1,Nodo n2) -> n1.frecuencia-n2.frecuencia);
            Deque<Nodo> pila=new LinkedList<>();
            pila.addAll(hojas);
-           System.out.println(pila);
+           //System.out.println(pila);
            //REcorro la pila mientras no este vacia
            while(!pila.isEmpty()){
                if(pila.size()>=2){
                    Nodo izq=pila.pop();
                    Nodo der=pila.pop();
-                   System.out.println(izq+" : "+der);
+                   //System.out.println(izq+" : "+der);
                    //Creo el Nodo superior
                    Nodo padre=new Nodo(izq.caracter.concat(der.caracter),der.frecuencia+izq.frecuencia);
                    padre.der = der;
@@ -126,7 +126,12 @@ public class ArbolHuffman {
      */
     public static String codificar(String texto, HashMap<String, String> mapa){
         StringBuilder codificado=new StringBuilder();
-        //Recorro cada Caracter
+        //Recorro cada Caracter y codifico a binario
+        char[] lista=texto.toCharArray();
+        for(char c : lista){
+            String letra=String.valueOf(c);
+            codificado.append(mapa.get(letra));
+        }
         return codificado.toString();
     }
     /**

@@ -102,7 +102,7 @@ public class Util {
         for(int i=0 ; i<corregido.length() ; i+=4){//REcorro de 4 en 4
             int numero=Integer.parseInt(corregido.substring(i,i+4),2);
             String reph=Integer.toString(numero,16);
-            hex.append(reph);
+            hex.append(reph.toUpperCase());
         }
         //añado - por cada 0
         for(int k=0; k<residuo; k++){

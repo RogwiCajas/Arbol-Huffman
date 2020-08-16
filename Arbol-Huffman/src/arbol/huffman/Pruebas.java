@@ -16,31 +16,37 @@ import java.util.HashMap;
 public class Pruebas {
 
     public static void main(String[] args) {
-        /*
+        
         //System.out.println(Util.leerTexto("src\\recursos\\archivo.txt"));
-        String texto=Util.leerTexto("src\\recursos\\archivo.txt");
+        /*String texto=Util.leerTexto("src\\recursos\\archivo.txt");
         HashMap<String,Integer> mapa=Util.calcularFrecuencias(texto);
         String hex=Util.binarioHexadecimal("0010010010010010011101101101101101101101100000000000000001011011011011011011011001001001001001001111111111111111111111110101010101010101010101");
-        
-        //System.out.println(hex);
-        HashMap<String,String> mapaClaves= new HashMap<>();
-        mapaClaves.put("A","001");
-        mapaClaves.put("B","110");
-        //Util.guardarTexto("src\\recursos\\archivo.txt", hex, mapaClaves);
-        System.out.println("----------------------------Mapa generado----------------------");
-        System.out.println(Util.leerMapa("src\\recursos\\archivo.txt_compress.txt"));
-        /*System.out.println("------------------------Binario-----------------------\n");
-        System.out.println(Util.hexadecimalBinario(hex));
+        System.out.println(hex);//pruebo que hex salga en may
         */
-        System.out.println("Prueba CrearArbol");
-        ArbolHuffman arbol=new ArbolHuffman();
+        /*HashMap<String,String> mapaClaves= new HashMap<>();
+        mapaClaves.put("A","001");
+        mapaClaves.put("B","110");*/
         
-        String texto=Util.leerTexto("src\\recursos\\archivo.txt");//lee el archivo y genera el texto
+        //Util.guardarTexto("src\\recursos\\archivo.txt", hex, mapaClaves);
+        //System.out.println("----------------------------Mapa generado----------------------");
+        //System.out.println(Util.leerMapa("src\\recursos\\archivo.txt_compress.txt"));
+        //System.out.println("------------------------Binario-----------------------\n");
+        //System.out.println(Util.hexadecimalBinario(hex));
+        
+        //System.out.println("Prueba CrearArbol");
+        ArbolHuffman arbol=new ArbolHuffman();
+        String texto=Util.leerTexto("src\\recursos\\archivo.txt");
+        //String texto=Util.leerTexto("src\\recursos\\archivo.txt");//lee el archivo y genera el texto
         HashMap<String,Integer> mapa=Util.calcularFrecuencias(texto);//recorre el texto y hace un mapa
         arbol.calcularArbol(mapa);//usa el mapa para generar un arbol
-        //arbol.enOrden();
-        System.out.println(arbol.calcularCodigos());
         
+        HashMap<String,String> codigos=arbol.calcularCodigos();
+        
+
+        //Codifico
+        System.out.println(texto);
+        System.out.println(codigos);
+        System.out.println(ArbolHuffman.codificar(texto,codigos));
     }
     
 }
