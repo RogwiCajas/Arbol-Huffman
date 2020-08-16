@@ -46,7 +46,9 @@ public class Pruebas {
         //Codifico
         System.out.println(texto);
         System.out.println(codigos);
-        System.out.println(ArbolHuffman.codificar(texto,codigos));
+        String codificado=ArbolHuffman.codificar(texto,codigos);
+        System.out.println(codificado);
+        System.out.println(ArbolHuffman.decodificar(codificado, codigos));
     }
     
 }

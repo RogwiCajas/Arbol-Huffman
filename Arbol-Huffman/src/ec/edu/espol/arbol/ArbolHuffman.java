@@ -142,7 +142,38 @@ public class ArbolHuffman {
      * @return 
      */
     public static String decodificar(String texto,HashMap<String,String> mapa){
-        throw  new UnsupportedOperationException("");
+        StringBuilder decodificado=new StringBuilder();
+        //REcorro el texto binario
+        char[] binArray=texto.toCharArray();
+        
+        for(int j=0 ; j<binArray.length ; j++){
+            boolean flag=true;
+            StringBuilder binario=new StringBuilder();
+            //binario.append(binArray[j]);            //guarda el binario
+            while(flag){//mientras sea 1 seguira buscando 
+                binario.append(binArray[j]);
+                //recorro el mapa
+                Iterator<Map.Entry<String,String>> it= mapa.entrySet().iterator();
+                while(it.hasNext()){
+                    Map.Entry<String,String> e=it.next();
+                    if(e.getValue().equalsIgnoreCase(binario.toString())){
+                        //Si el binario formado es igual a un value
+                        decodificado.append(e.getKey());//envio su letra corresondiente
+                        flag=false;
+                        j--;
+                        break;
+                        
+                    }                //Caso contrario debe seguir buscando 
+                    
+                }
+                //Si acabo de recorrer el mapa y no encontro una coincidencia
+                j++;//muevo
+                
+                
+            }
+        }
+            
+        return decodificado.toString();
     }
     
     /**
