@@ -198,7 +198,7 @@ public class Util {
      * @param nombreArchivo
      * @param texto 
      */
-    private static void actualizarArchivo(String nombreArchivo, String texto){
+    public static void actualizarArchivo(String nombreArchivo, String texto){
         FileWriter fichero = null;
         PrintWriter pw= null;
         try {

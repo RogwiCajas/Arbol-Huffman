@@ -220,6 +220,10 @@ public class ArbolHuffman {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public Nodo getRaiz() {
         return raiz;
     }
