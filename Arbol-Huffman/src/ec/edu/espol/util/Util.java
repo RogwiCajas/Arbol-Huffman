@@ -43,9 +43,9 @@ public class Util {
             
         } catch ( NullPointerException | IOException e) {
             if(e instanceof NullPointerException){
-                System.err.println("Archivo Vacio!!");
+                VentanasEmergentes.crearError("Estado Lectura", "Archivo Sin contenido!!");
             }else{
-                System.err.println("Archivo no encontrado!!");
+                VentanasEmergentes.crearError("Estado Lecvtura", "Error al abrir el archivo!!");
             }
         }finally{
             try{                    
@@ -249,9 +249,10 @@ public class Util {
             
         } catch ( NullPointerException | IOException e) {
             if(e instanceof NullPointerException){
-                System.err.println("Archivo Vacio!!");
+                VentanasEmergentes.crearError("Estado Descompresion", "Archivo de Codigos no encontrado!!");
+
             }else{
-                System.err.println("Archivo no encontrado!!");
+                VentanasEmergentes.crearError("Estado Descompresion", "Archivo de Codigos no encontrado!!");
             }
         }finally{
             try{                    
@@ -266,4 +267,6 @@ public class Util {
         
         return mapa;
     }
+    
+    
 }

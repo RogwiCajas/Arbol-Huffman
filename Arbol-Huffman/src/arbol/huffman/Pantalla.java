@@ -7,6 +7,7 @@ package arbol.huffman;
 
 import ec.edu.espol.arbol.ArbolHuffman;
 import ec.edu.espol.util.Util;
+import ec.edu.espol.util.VentanasEmergentes;
 import java.io.File;
 import java.util.HashMap;
 import javafx.event.ActionEvent;
@@ -60,6 +61,21 @@ public class Pantalla {
         btnDescomprimir.setPrefSize(240,40);
         btnComprimir.setPrefSize(240, 40);
         
+        btnDescomprimir.setStyle("-fx-text-fill: White;-fx-background-color: linear-gradient(#61a2b1, #2A5058);");
+        btnComprimir.setStyle("-fx-background-color: linear-gradient(#61a2b1, #2A5058); -fx-text-fill: White;");
+        
+        
+        //Contenedor
+        contenedor.setPadding(new Insets(150,70,70,100));
+        contenedor.setAlignment(Pos.CENTER);
+        contenedor.setStyle("-fx-background-color: indianred");
+        
+        //Titulo
+        titulo.setStyle("-fx-text-fill: Black; -fx-font-size: 35; -fx-font-weight: BOLD; -fx-background-color: Cyan");
+        titulo.setAlignment(Pos.CENTER);
+        titulo.setLayoutX(150);
+        titulo.setLayoutY(80);
+        
     }
      private  void setearAcciones(Stage stage){
         btnComprimir.setOnAction( new EventHandler<ActionEvent>() { 
@@ -71,6 +87,7 @@ public class Pantalla {
         btnDescomprimir.setOnAction( new EventHandler<ActionEvent>() { 
 			@Override
 			public void handle(ActionEvent t) {
+                            Descomprimir(stage);
                             
 			}
 	});
@@ -87,6 +104,7 @@ public class Pantalla {
         //abro el archivo
         String path=elegirArchivo(stage, "Escoja archivo a Comprimir: ");
         String texto=Util.leerTexto(path);
+        if(texto!=null){
         //genero el mapa de frecuencia
         HashMap<String,Integer> mapaF=Util.calcularFrecuencias(texto);
         //Creo el tda Arbol
@@ -99,21 +117,29 @@ public class Pantalla {
         //Paso a Hexadecimal
         String codificadoH=Util.binarioHexadecimal(codificadoB);
         //EScribo y genero archivo de codigos
-        Util.guardarTexto(path,codificadoH, mapaC);   
-    }
+        Util.guardarTexto(path,codificadoH, mapaC);
+        VentanasEmergentes.crearInformacion("Estado Compresion", "Archivo comprimido en :"+path);
+    
+        }
+    }    
     private void Descomprimir(Stage stage){
         //abro el archivo
         String path=elegirArchivo(stage, "Escoja archivo a Descomprimir: ");
         String texto=Util.leerTexto(path);
-        //Paso a binario
-        String binario=Util.hexadecimalBinario(texto);
-        //Creo el mapa de codigo
-        HashMap<String,String> codigos=Util.leerMapa(path+"_compress.txt");
-        //DEscomprimo
-        String original = ArbolHuffman.decodificar(binario, codigos);
-        //Escribo en el archivo
-        Util.actualizarArchivo(path,original);
-    }
+        if(texto!=null){//Si no hubo error al abrir
+            //Paso a binario
+            String binario=Util.hexadecimalBinario(texto);
+            //Creo el mapa de codigo
+            HashMap<String,String> codigos=Util.leerMapa(path+"_compress.txt");
+            if(!codigos.isEmpty()){
+                //DEscomprimo
+                String original = ArbolHuffman.decodificar(binario, codigos);
+                //Escribo en el archivo
+                Util.actualizarArchivo(path,original);
+                VentanasEmergentes.crearInformacion("Estado Desccmpresion", "Archivo descomprimido en :"+path);
+            }
+        }
+    }    
     public Pane getRoot(){
         return this.root;
     }
