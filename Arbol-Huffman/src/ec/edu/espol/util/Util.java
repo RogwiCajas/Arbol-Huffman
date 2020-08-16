@@ -230,6 +230,8 @@ public class Util {
      * @return 
      */
     public static HashMap<String,String> leerMapa(String nombreArchivo){
+        //Depurar el nombre
+        
         HashMap<String,String> mapa=new HashMap<>();
         File file=null;
         FileReader fr=null;

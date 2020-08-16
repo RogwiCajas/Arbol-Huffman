@@ -98,13 +98,17 @@ public class Pantalla {
                             fileChooser.getExtensionFilters().addAll(
                             new ExtensionFilter("Text Files", "*.txt"));
                             File selectedFile = fileChooser.showOpenDialog(stage);
+                            if(selectedFile==null){
+                                return "";
+                            }
                             return selectedFile.getPath();
     }
     private void Comprimir(Stage stage){
         //abro el archivo
         String path=elegirArchivo(stage, "Escoja archivo a Comprimir: ");
+        if(!path.equals("")){
         String texto=Util.leerTexto(path);
-        if(texto!=null){
+        if(texto!=null ){
         //genero el mapa de frecuencia
         HashMap<String,Integer> mapaF=Util.calcularFrecuencias(texto);
         //Creo el tda Arbol
@@ -119,17 +123,18 @@ public class Pantalla {
         //EScribo y genero archivo de codigos
         Util.guardarTexto(path,codificadoH, mapaC);
         VentanasEmergentes.crearInformacion("Estado Compresion", "Archivo comprimido en :"+path);
-    
+        }
         }
     }    
     private void Descomprimir(Stage stage){
         //abro el archivo
         String path=elegirArchivo(stage, "Escoja archivo a Descomprimir: ");
+        if(!path.equals("")){
         String texto=Util.leerTexto(path);
-        if(texto!=null){//Si no hubo error al abrir
+        if(texto!=null ){//Si no hubo error al abrir
             //Paso a binario
             String binario=Util.hexadecimalBinario(texto);
-            //Creo el mapa de codigo
+            //Creo el mapa de codigo, depuro el nombre
             HashMap<String,String> codigos=Util.leerMapa(path+"_compress.txt");
             if(!codigos.isEmpty()){
                 //DEscomprimo
@@ -138,6 +143,7 @@ public class Pantalla {
                 Util.actualizarArchivo(path,original);
                 VentanasEmergentes.crearInformacion("Estado Desccmpresion", "Archivo descomprimido en :"+path);
             }
+        }    
         }
     }    
     public Pane getRoot(){

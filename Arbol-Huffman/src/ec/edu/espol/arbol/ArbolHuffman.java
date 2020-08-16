@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.PriorityQueue;
 
 /**
  *
@@ -56,23 +57,32 @@ public class ArbolHuffman {
                 hojas.add(n);
            }
            hojas.sort((Nodo n1,Nodo n2) -> n1.frecuencia-n2.frecuencia);
-           Deque<Nodo> pila=new LinkedList<>();
-           pila.addAll(hojas);
+                     
+           PriorityQueue<Nodo> colaP=new PriorityQueue<>((Nodo n1,Nodo n2) -> n1.frecuencia-n2.frecuencia);
+           colaP.addAll(hojas);
+           
            //System.out.println(pila);
            //REcorro la pila mientras no este vacia
-           while(!pila.isEmpty()){
-               if(pila.size()>=2){
-                   Nodo izq=pila.pop();
-                   Nodo der=pila.pop();
+           while(!colaP.isEmpty()){
+               if(colaP.size()>=2){
+                   
+                   Nodo izq=colaP.poll();
+                   Nodo der=colaP.poll();
                    //System.out.println(izq+" : "+der);
-                   //Creo el Nodo superior
+                    //Creo el Nodo superior
+                   if(izq.caracter.compareTo(der.caracter)>0 && izq.frecuencia==der.frecuencia){
+                       //Cuando exista empate, el izq debe ser menor
+                       Nodo tmp=der;
+                       der=izq;
+                       izq=tmp;
+                   }
                    Nodo padre=new Nodo(izq.caracter.concat(der.caracter),der.frecuencia+izq.frecuencia);
                    padre.der = der;
                    padre.izq = izq;
-                   pila.offer(padre);
+                   colaP.offer(padre);
                }
                else{
-                   this.raiz=pila.pop();
+                   this.raiz=colaP.poll();
                }
            }
            
