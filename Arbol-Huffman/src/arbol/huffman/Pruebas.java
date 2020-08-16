@@ -5,6 +5,7 @@
  */
 package arbol.huffman;
 
+import ec.edu.espol.arbol.ArbolHuffman;
 import ec.edu.espol.util.Util;
 import java.util.HashMap;
 
@@ -15,6 +16,7 @@ import java.util.HashMap;
 public class Pruebas {
 
     public static void main(String[] args) {
+        /*
         //System.out.println(Util.leerTexto("src\\recursos\\archivo.txt"));
         String texto=Util.leerTexto("src\\recursos\\archivo.txt");
         HashMap<String,Integer> mapa=Util.calcularFrecuencias(texto);
@@ -29,7 +31,15 @@ public class Pruebas {
         System.out.println(Util.leerMapa("src\\recursos\\archivo.txt_compress.txt"));
         /*System.out.println("------------------------Binario-----------------------\n");
         System.out.println(Util.hexadecimalBinario(hex));
-           */
+        */
+        System.out.println("Prueba CrearArbol");
+        ArbolHuffman arbol=new ArbolHuffman();
+        
+        String texto=Util.leerTexto("src\\recursos\\archivo.txt");//lee el archivo y genera el texto
+        HashMap<String,Integer> mapa=Util.calcularFrecuencias(texto);//recorre el texto y hace un mapa
+        arbol.calcularArbol(mapa);//usa el mapa para generar un arbol
+        arbol.enOrden();
+        
     }
     
 }
