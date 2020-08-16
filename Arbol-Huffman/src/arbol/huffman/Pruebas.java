@@ -38,7 +38,8 @@ public class Pruebas {
         String texto=Util.leerTexto("src\\recursos\\archivo.txt");//lee el archivo y genera el texto
         HashMap<String,Integer> mapa=Util.calcularFrecuencias(texto);//recorre el texto y hace un mapa
         arbol.calcularArbol(mapa);//usa el mapa para generar un arbol
-        arbol.enOrden();
+        //arbol.enOrden();
+        System.out.println(arbol.calcularCodigos());
         
     }
     

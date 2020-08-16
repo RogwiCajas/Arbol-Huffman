@@ -83,7 +83,39 @@ public class ArbolHuffman {
      * @return 
      */
     public HashMap<String,String> calcularCodigos(){
-        throw  new UnsupportedOperationException("");
+        HashMap<String,String> mapa=new HashMap<>();
+        if(this.raiz==null) return mapa;
+        char []claves=this.raiz.caracter.toCharArray();
+        for(char c: claves){
+            String clave=String.valueOf(c);
+            mapa.put(clave,calcular(clave,this.raiz));
+        }
+        
+        return mapa;
+    }
+    /**
+     * Recorre el arbol y genera un codigo con el camino
+     * @param car
+     * @param p
+     * @return 
+     */
+    private String calcular(String car,Nodo p){
+        if(p==null){
+            return "";
+        }
+        //Si el lado derecho contiene al caracter
+        if( p.der!=null  && p.der.caracter.contains(car) ){
+            return "1"+calcular(car,p.der);
+        }
+        //Si el lado izquierdo contiene al caracter
+        else if( p.izq!=null && p.izq.caracter.contains(car) ) {
+            return "0"+calcular(car,p.izq);
+        }
+        else if(p.caracter.equals(car)){
+            return "";
+        }
+        return "";
+        
     }
     /**
      * Recibe el texto leido y el mapa con los codigos de cada caracter y retorna
@@ -93,7 +125,9 @@ public class ArbolHuffman {
      * @return 
      */
     public static String codificar(String texto, HashMap<String, String> mapa){
-        throw  new UnsupportedOperationException("");
+        StringBuilder codificado=new StringBuilder();
+        //Recorro cada Caracter
+        return codificado.toString();
     }
     /**
      * Recibe el codio Huffman y el mapa con los codigos de cada caracter y retorna
@@ -148,6 +182,10 @@ public class ArbolHuffman {
             System.out.println(n.caracter);
             enOrden(n.der);
         }
+    }
+
+    public Nodo getRaiz() {
+        return raiz;
     }
     
     
