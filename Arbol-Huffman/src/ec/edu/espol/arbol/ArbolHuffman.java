@@ -1,7 +1,6 @@
 
 package ec.edu.espol.arbol;
 
-import java.util.Deque;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -17,7 +16,6 @@ public class ArbolHuffman {
     private Nodo raiz;
     
     private class Nodo{
-        //Creo que estos valores deberiamos manejra en el nodo
         Nodo izq;
         Nodo der;
         String  caracter;
@@ -30,17 +28,14 @@ public class ArbolHuffman {
             this.caracter=caracter;
             this.frecuencia=f;
         }
-
         @Override
         public String toString() {
             return  caracter + "," + frecuencia; 
-        }
-        
+        }  
     }
 
     public ArbolHuffman() {
     }
-    
     
     /**
      * Recibe el mapa de frecuencias de los carcateres y genera el Arbol huffman
@@ -159,7 +154,6 @@ public class ArbolHuffman {
         for(int j=0 ; j<binArray.length ; j++){
             boolean flag=true;
             StringBuilder binario=new StringBuilder();
-            //binario.append(binArray[j]);            //guarda el binario
             while(flag){//mientras sea 1 seguira buscando 
                 binario.append(binArray[j]);
                 //recorro el mapa
@@ -170,16 +164,12 @@ public class ArbolHuffman {
                         //Si el binario formado es igual a un value
                         decodificado.append(e.getKey());//envio su letra corresondiente
                         flag=false;
-                        j--;
-                        break;
-                        
-                    }                //Caso contrario debe seguir buscando 
-                    
+                        break;  
+                    }                    
                 }
-                //Si acabo de recorrer el mapa y no encontro una coincidencia
-                j++;//muevo
-                
-                
+                if(flag){
+                    j++;//muevo porque aun no encuntro
+                }
             }
         }
             
@@ -234,6 +224,7 @@ public class ArbolHuffman {
      *
      * @return
      */
+    
     public Nodo getRaiz() {
         return raiz;
     }
