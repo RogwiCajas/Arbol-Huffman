@@ -6,7 +6,6 @@ package ec.edu.espol.util;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -30,30 +29,19 @@ public class Util {
      */
     public static String leerTexto(String nombreArchivo){
         String texto="";
-        File file=null;
-        FileReader fr=null;
-        BufferedReader br=null;
-        try {
-            file=new File(nombreArchivo);
-            fr=new FileReader(file);
-            br=new BufferedReader(fr);
+        
+        try(    FileReader fr=new FileReader(new File(nombreArchivo));
+                BufferedReader br=new BufferedReader(fr);)
+        {
             texto=br.readLine();
-            if(texto==null) throw  new NullPointerException("Archivo Vacío");
+            if(null==texto) throw  new NullPointerException("Archivo Vacío");
             
             
         } catch ( NullPointerException | IOException e) {
             if(e instanceof NullPointerException){
                 VentanasEmergentes.crearError("Estado Lectura", "Archivo Sin contenido!!");
             }else{
-                VentanasEmergentes.crearError("Estado Lecvtura", "Error al abrir el archivo!!");
-            }
-        }finally{
-            try{                    
-                if( null != fr ){   
-                fr.close();     
-                }                  
-            }catch (IOException e2){
-                System.err.println("ERROR al cerrar el fichero!!");
+                VentanasEmergentes.crearError("Estado Lectura", "Error al abrir el archivo!!");
             }
         }
         return  texto;
@@ -163,11 +151,10 @@ public class Util {
      * @param mapa 
      */
     private static void guardarClaves(String nombreArchivo,HashMap<String,String> mapa){
-        FileWriter fichero = null;
-        PrintWriter pw= null;
-        try {
-            fichero = new FileWriter(nombreArchivo+"_compress.txt");
-            pw=new PrintWriter(fichero);
+                
+        try (PrintWriter pw= new PrintWriter(new FileWriter(nombreArchivo+"_compress.txt"));
+            )
+        {
             //Recorro  el mapa y escribo en el doc
             Iterator<Map.Entry<String,String>> it= mapa.entrySet().iterator();
             while(it.hasNext()){
@@ -182,14 +169,6 @@ public class Util {
             }else{
                 System.err.println("Archivo no encontrado!!");
             }
-        }finally{
-            try {
-                if(fichero!=null){
-                    fichero.close();
-                }
-            } catch (IOException e) {
-                System.err.println("Error al cerrar el archivo!!");
-            }
         }
         
     }
@@ -199,11 +178,9 @@ public class Util {
      * @param texto 
      */
     public static void actualizarArchivo(String nombreArchivo, String texto){
-        FileWriter fichero = null;
-        PrintWriter pw= null;
-        try {
-            fichero = new FileWriter(nombreArchivo);
-            pw=new PrintWriter(fichero);
+               
+        try (PrintWriter pw=new PrintWriter(new FileWriter(nombreArchivo));)
+        {
             //Escribo en el doc
             pw.print(texto);
             
@@ -212,14 +189,6 @@ public class Util {
                 System.err.println("Archivo Vacio!!");
             }else{
                 System.err.println("Archivo no encontrado!!");
-            }
-        }finally{
-            try {
-                if(fichero!=null){
-                    fichero.close();
-                }
-            } catch (IOException e) {
-                System.err.println("Error al cerrar el archivo!!");
             }
         }
     }
@@ -230,16 +199,10 @@ public class Util {
      * @return 
      */
     public static HashMap<String,String> leerMapa(String nombreArchivo){
-        //Depurar el nombre
-        
-        HashMap<String,String> mapa=new HashMap<>();
-        File file=null;
-        FileReader fr=null;
-        BufferedReader br=null;
-        try {
-            file=new File(nombreArchivo);
-            fr=new FileReader(file);
-            br=new BufferedReader(fr);
+        //Depurar el nombre        
+        HashMap<String,String> mapa=new HashMap<>();        
+        try (BufferedReader br=new BufferedReader(new FileReader(new File(nombreArchivo)));)
+        {
             String linea;
             while((linea=br.readLine())!=null){
                 String data[] = linea.trim().split(",");
@@ -250,23 +213,8 @@ public class Util {
             
             
         } catch ( NullPointerException | IOException e) {
-            if(e instanceof NullPointerException){
-                VentanasEmergentes.crearError("Estado Descompresion", "Archivo de Codigos no encontrado!!");
-
-            }else{
-                VentanasEmergentes.crearError("Estado Descompresion", "Archivo de Codigos no encontrado!!");
-            }
-        }finally{
-            try{                    
-                if( null != fr ){   
-                fr.close();     
-                }                  
-            }catch (IOException e2){
-                System.err.println("ERROR al cerrar el fichero!!");
-            }
+            VentanasEmergentes.crearError("Estado Descompresion", "Archivo de Codigos no encontrado!!");
         }
-        
-        
         return mapa;
     }
     

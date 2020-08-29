@@ -1,0 +1,6 @@
+projectKey=EDP2Grupo8-2020:Arbol-Huffman
+serverUrl=http://200.9.176.59:9000
+serverVersion=7.7.0.23042
+dashboardUrl=http://200.9.176.59:9000/dashboard?id=EDP2Grupo8-2020%3AArbol-Huffman
+ceTaskId=AXQ2A65v2njepCnyV4c4
+ceTaskUrl=http://200.9.176.59:9000/api/ce/task?id=AXQ2A65v2njepCnyV4c4

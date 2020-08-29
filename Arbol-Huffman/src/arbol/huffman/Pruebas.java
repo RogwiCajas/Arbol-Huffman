@@ -17,24 +17,24 @@ public class Pruebas {
 
     public static void main(String[] args) {
         
-        //System.out.println(Util.leerTexto("src\\recursos\\archivo.txt"));
-        /*String texto=Util.leerTexto("src\\recursos\\archivo.txt");
+        System.out.println(Util.leerTexto("src\\recursos\\archivo.txt"));
+        String texto=Util.leerTexto("src\\recursos\\archivo.txt");
         HashMap<String,Integer> mapa=Util.calcularFrecuencias(texto);
         String hex=Util.binarioHexadecimal("0010010010010010011101101101101101101101100000000000000001011011011011011011011001001001001001001111111111111111111111110101010101010101010101");
-        System.out.println(hex);//pruebo que hex salga en may
-        */
-        /*HashMap<String,String> mapaClaves= new HashMap<>();
-        mapaClaves.put("A","001");
-        mapaClaves.put("B","110");*/
+        System.out.println(mapa);//pruebo que hex salga en may
         
-        //Util.guardarTexto("src\\recursos\\archivo.txt", hex, mapaClaves);
+        HashMap<String,String> mapaClaves= new HashMap<>();
+        mapaClaves.put("A","001");
+        mapaClaves.put("B","110");
+        
+        Util.guardarTexto("src\\recursos\\archivo.txt", hex, mapaClaves);
         //System.out.println("----------------------------Mapa generado----------------------");
         //System.out.println(Util.leerMapa("src\\recursos\\archivo.txt_compress.txt"));
         //System.out.println("------------------------Binario-----------------------\n");
         //System.out.println(Util.hexadecimalBinario(hex));
         
         //System.out.println("Prueba CrearArbol");
-        ArbolHuffman arbol=new ArbolHuffman();
+        /*ArbolHuffman arbol=new ArbolHuffman();
         String texto=Util.leerTexto("src\\recursos\\archivo.txt");
         //String texto=Util.leerTexto("src\\recursos\\archivo.txt");//lee el archivo y genera el texto
         HashMap<String,Integer> mapa=Util.calcularFrecuencias(texto);//recorre el texto y hace un mapa
@@ -49,6 +49,7 @@ public class Pruebas {
         String codificado=ArbolHuffman.codificar(texto,codigos);
         System.out.println(codificado);
         System.out.println(ArbolHuffman.decodificar(codificado, codigos));
+        */
     }
     
 }
